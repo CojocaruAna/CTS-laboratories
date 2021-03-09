@@ -1,0 +1,9 @@
+Code review
+
+Phase 1 - naming conventions
+->rename Clasa1;
+->rename Calculeaza and use lowerCamelCase;
+-> t,s,perioada renaming;
+->rename rezultat;
+-> rename valoare;
+->remove hard coded-values aka "magic" numbers;
