@@ -7,3 +7,5 @@ Phase 1 - naming conventions
 ->rename rezultat;
 -> rename valoare;
 ->remove hard coded-values aka "magic" numbers;
+
+->add validations for input values;
