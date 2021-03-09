@@ -1,11 +1,15 @@
 Code review
 
 Phase 1 - naming conventions
+
 ->rename Clasa1;
 ->rename Calculeaza and use lowerCamelCase;
 -> t,s,perioada renaming;
 ->rename rezultat;
 -> rename valoare;
 ->remove hard coded-values aka "magic" numbers;
-
 ->add validations for input values;
+
+Phase 2 - KISS & Single Responsability
+->simplify expretions;
+->a function should do one thing;
