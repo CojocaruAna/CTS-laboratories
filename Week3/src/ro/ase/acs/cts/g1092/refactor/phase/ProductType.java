@@ -12,4 +12,5 @@ public enum ProductType {
 	public float getDiscount() {
 		return this.discountValue;
 	}
+	
 }

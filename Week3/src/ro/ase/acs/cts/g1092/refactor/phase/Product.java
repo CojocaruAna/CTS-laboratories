@@ -1,47 +1,86 @@
 package ro.ase.acs.cts.g1092.refactor.phase;
 
-import ro.ase.acs.cts.g1092.refactor.exceptions.InvalidAgeExeption;
-import ro.ase.acs.cts.g1092.refactor.exceptions.InvalidPriceExeption;
+import ro.ase.acs.cts.g1092.refactor.exceptions.InvalidAgeException;
+import ro.ase.acs.cts.g1092.refactor.exceptions.InvalidPriceException;
+import ro.ase.acs.cts.g1092.refactor.phase.services.Marketing2021Strategy;
+import ro.ase.acs.cts.g1092.refactor.phase.services.MarketingServiceInterface;
+
 
 public class Product {
 	
-	public static final int MAX_AGE_ACCOUNT = 10;
-	public static final float MAX_FIDELITY_DISCOUNT = 0.15f ;
+	MarketingServiceInterface mkService = null;
+	ValidatorServiceInterface validator = null;
 	
-	public static float getDiscountValue(float price, float discount) {
-		return discount*price;
+	public Product(MarketingServiceInterface mkService, 
+			ValidatorServiceInterface validator) {
+		/*
+		 * if(mkService == null) { throw new NullPointerException(); } this.mkService =
+		 * mkService;
+		 */
+		this.setMarketingService(mkService);
+		this.validator = validator;
 	}
 	
-	public static float getFinalPriceWithDiscountandFidelity(float price, float discountValue, float fidelityDiscount) {
-		return (price-discountValue) *(1- fidelityDiscount);
+	
+	//version 4 - use the global service collection
+	public Product() {
+		//dependency injection based on the global services collection
+		for(Object service : TestProduct.services) {
+			if(service instanceof MarketingServiceInterface) {
+				this.setMarketingService((MarketingServiceInterface)service);
+			}
+			if(service instanceof ValidatorServiceInterface) {
+				this.validator = (ValidatorServiceInterface) service;
+			}
+		}
+		
+		if(this.mkService == null) {
+			throw new UnsupportedOperationException();
+		}
+		if(this.validator == null) {
+			throw new UnsupportedOperationException();
+		}
 	}
 	
-	private static float getFidelityDiscount(int accountAge) {
-		return (accountAge > MAX_AGE_ACCOUNT) ? (float)MAX_FIDELITY_DISCOUNT : (float)accountAge/100; 
+	//optional - based on design specs
+	public void setMarketingService(MarketingServiceInterface mkService) {
+		if(mkService == null) {
+			throw new NullPointerException();
+		}
+		this.mkService = mkService;
 	}
 	
-	private static float getFinalPrice(float price, float fidelityDiscount, ProductType type) {
+	private static float getDiscountValue(float price, float discount) {
+		return discount * price;
+	}
+	
+	private static float getPriceWithDiscountAndFidelity(
+			float price, float discountValue, float fidelityDiscount) {
+		
+		return (price - discountValue) * (1 - fidelityDiscount);
+	}
+	
+	
+	private static float getFinalPrice(
+			float price, float fidelityDiscount, ProductType type) {
 		float discountValue = getDiscountValue(price, type.getDiscount());
-    	float finalPrice = getFinalPriceWithDiscountandFidelity( price,  discountValue,  0);
+    	float finalPrice = getPriceWithDiscountAndFidelity(price, discountValue, fidelityDiscount);
     	return finalPrice;
 	}
 	
-	public float calculeazaPriceWithDiscount(ProductType productType, float price, int accountAge) throws InvalidPriceExeption, InvalidAgeExeption
+	
+	public float computePriceWithDiscount(ProductType productType, float price, int accountAge) 
+			throws InvalidPriceException, InvalidAgeException
 	  {
-		if(price <= 0 ) {
-			throw new InvalidPriceExeption();
-		}
-		if(accountAge<0) {
-			throw new InvalidAgeExeption();
-		}
-	    float finalPrice = 0;
-	    float fidelityDiscount = (productType == ProductType.NEW)? 0: getFidelityDiscount(accountAge);
+		
+		validator.validatePrice(price);
+		validator.validateAge(accountAge);
+		
+	    float fidelityDiscount = 
+	    		(productType == ProductType.NEW) ? 0 : mkService.getFidelityDiscount(accountAge);
 	    
-	    float discountValue = 0;
-	   
-	    finalPrice = getFinalPrice( price,  fidelityDiscount,  ProductType.LEGACY);
-	    	
-	    
+	    float finalPrice = getFinalPrice(price,fidelityDiscount, productType);
+    	    
 	    return finalPrice;
 	  }
 }

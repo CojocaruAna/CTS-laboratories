@@ -10,6 +10,10 @@ Phase 1 - naming conventions
 ->remove hard coded-values aka "magic" numbers;
 ->add validations for input values;
 
-Phase 2 - KISS & Single Responsability
-->simplify expretions;
+Phase 2 - KISS & Single Responsibility
+->simplify expressions;
 ->a function should do one thing;
+
+Phase 3 - Single responsibility & dependency inversion(DIP)
+-the static final values may change when the marketing strategy will change;
+-so will the getFidelityDiscount();
