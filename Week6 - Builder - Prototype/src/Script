@@ -1,5 +1,5 @@
 1. Instantiation of the superhero associated with the player:
-
+//we use builder
 - there are many attributes to allow its customization(objects have many attributes)
 - name, is Positive, points Life, weapon Left Hand, weapon 
 Right Hand, super Power, is Wounded Critical, super Super 
@@ -10,10 +10,10 @@ the attributes but also without allowing the programmers
 to omit some of them;(creational section -builder,singleton,prototype,simple factory)
 
 2. All characters have a 3D graphic model:
-
-- instances of the same character can appear in the game
+//we use prototype
+- instances of the same character can appear in the game(multiple objects with the same data)
 - creating the 3D model is an expensive process because 
-it involves loading and generating the model;
+it involves loading and generating the model;(uses a lot of resources)
 - an efficient solution must be found to create several 
 instances of the same character;
 
