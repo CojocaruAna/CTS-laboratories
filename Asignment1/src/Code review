@@ -1,0 +1,79 @@
+Code review
+
+A)Formatting(making sure the code formatting is applied):
+
+->implemented proper alignments and white spaces where needed;
+->curly brackets were added;
+->else clause from constructor was removed because of the Exception;
+
+
+B)General Programming:
+
+->applied lowerCamelCase to the attributes;
+->we used string builder function instead of the string concatenation;
+
+
+C)Meaningful Names(using Intention-Revealing Names):
+
+->modified attributes name so they are understood by others:
+	* rate = monthlyRate;
+	* value = loanValue;
+	* type = bankAccountType;
+->modified functions names so everyone can understand exactly what they do:
+	* loan() = getLoanValue();
+	* setValue() = setLoanValue();
+	* to_string() = getAccountInfo();
+	* calculate() = getPremiumAndSuperPremiumBankAccountsFeeValue();
+	* getRate() = getMonthlyRate();
+	* monthlyRate() = computeMonthlyRate();
+	
+	
+D)Comments(explaining yourself in code):
+
+->removed the comments since everything is selfexplanatory;
+
+
+E)Enumerations:
+->created an enumeration for the bank account type;
+
+F)Mutability:
+
+->implemented the .0125 broker fee as a "static final float BROKER_FEE = .0125f";
+->implemented the 365 integer  as "static final float DAYS_IN_A_YEAR = 365";
+
+
+G)The creation/destruction of objects:
+
+->removed the temp variable and replaced it with "DAYS_IN_A_YEAR";
+->removed the Account variable in the calculate function and used bankAccounts[i];
+
+
+H)Methods and Validations:
+
+->implemented validations for loan and monthly rate;
+
+
+I)Functions:
+
+->simplyfied the calculate function by diminishing it into other more udnerstandable functions:
+    * difference between interest and principal;
+	* account interest fee;
+	* loan value with interest;
+	* account final fee;
+
+J)Exceptions:
+
+->created custom exceptions;
+
+
+K)Classes and Interfaces:
+
+->made the class atributes private and implemented their respective "get";
+->implemented an interface for the monthly rate and used it in the BankAccount class;
+	
+	
+	
+L)Classes:
+
+->created the ennumeration, interface and exception to reduce the size of the BankAccount class;
+->distribute the BankAccount class functionalities in other classes;
