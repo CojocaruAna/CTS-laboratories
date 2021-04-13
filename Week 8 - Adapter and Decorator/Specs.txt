@@ -1,0 +1,7 @@
+1. The use of an external library that contains Disney characters. (adapter)
+- currently the game contains its own characters that are part of the ACME framework
+
+2. Changing the characteristics of some super-heroes during the game (decorator)
+- During the game super-heroes can be equipped with new equipment
+- The superhero's behavior can change dynamically depending on 
+the interaction with the other characters in the game
