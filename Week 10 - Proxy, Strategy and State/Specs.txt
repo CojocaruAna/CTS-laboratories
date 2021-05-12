@@ -1,0 +1,24 @@
+1. Add an additional login filter (PROXY)
+- at this moment the login is made by user name and password and if the password is 
+wrong the user can try several times
+- there are attacks on the players' accounts and the attacker guesses the password 
+related to the account after several attempts
+- it is desired to modify the login module by limiting the number of attempts 
+to a maximum of 3 or add 2 step authentication
+- the existing login module must be modified without interrupting the game
+
+
+2. Depending on the involvement in the game (STRATEGY)
+(time spent, activity during the game, etc.)
+players receive bonus points. This strategy is established by the marketing department 
+and changes depending on other campaigns, time of year, etc.
+Find a solution that allows:
+- modifying the strategy for granting the runtime bonus without modifying 
+the implementation of the game. It is considered that currently there are 
+3 strategies / ways to grant the bonus.
+
+
+3. Game characters actions are affected by their state (STATE)
+- the game play is different
+- the action effects are different
+- the way the super hero moves is affected by its state (life points)
