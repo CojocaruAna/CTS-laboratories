@@ -1,0 +1,77 @@
+Theme of the bachelor thesis:
+"Building a database for a Beauty Salon"
+
+1.Singleton:
+
+In order to create a database for a Beauty salon, you need to 
+create a software solution that will provide:
+
+Efficient management of the connection to the Database / logger
+- the different modules must use or link an unique connection to 
+the database;
+
+- programmers implementing those modules cannot build 
+multiple objects associated with the database connection;
+
+- the client must use a unique object to take care of the 
+connection to the database;
+*one object and unique=singleton
+*constructors all private
+
+Advantages of singleton:
+-Any object that has access to the Singleton's class header can use the Singleton. 
+-This design pattern defines the structure of a class that can have only one instance. 
+-A Singleton encapsulates a unique resource and makes it readily available throughout the application.
+
+Cons of Singleton:
+-They make unit testing very hard.
+-You cannot completely isolate classes dependent on singletons.
+
+2.Builder: 
+Instantiation of the product associated with the customer/client:
+
+- there are many attributes to allow its customization(objects have many attributes)
+- name,price,isAvailable(attributes);
+- an efficient solution must be found that allows the 
+creation of the product without giving values for all 
+the attributes but also without allowing the programmers 
+to omit some of them;
+Advantages:
+-The parameters to the constructor are reduced and are provided in highly readable method calls.
+-Builder design pattern also helps in minimizing the number of parameters in constructor and thus there is no need to pass in null for optional parameters to the constructor.
+-Object is always instantiated in a complete state
+-Immutable objects can be build without much complex logic in object building process.
+Cons:
+-The number of lines of code increase at least to double in builder pattern, but the effort pays off in terms of design flexibility and much more readable code.
+-Requires creating a separate ConcreteBuilder for each different type of Product.
+
+3.Prototype:
+All products have a 3D graphic model:
+
+- instances of the same product can appear on the page(multiple objects with the same data)
+- creating the 3D model is an expensive process because 
+it involves loading and generating the model;(uses a lot of resources)
+- an efficient solution must be found to create several 
+instances of the same character;
+pros:
+Adding and removing products at run-time – Prototypes let you incorporate a new concrete product class into a system simply by registering a prototypical instance with the client. That’s a bit more flexible than other creational patterns, because a client can install and remove prototypes at run-time.
+Specifying new objects by varying values – Highly dynamic systems let you define new behavior through object composition by specifying values for an object’s variables and not by defining new classes.
+Specifying new objects by varying structure – Many applications build objects from parts and subparts. For convenience, such applications often let you instantiate complex, user-defined structures to use a specific subcircuit again and again.
+Reduced subclassing – Factory Method often produces a hierarchy of Creator classes that parallels the product class hierarchy. The Prototype pattern lets you clone a prototype instead of asking a factory method to make a new object. Hence you don’t need a Creator class hierarchy at all.
+cons:
+Overkill for a project that uses very few objects and/or does not have an underlying emphasis on the extension of prototype chains.
+It also hides concrete product classes from the client
+Each subclass of Prototype must implement the clone() operation which may be difficult, when the classes under consideration already exist. Also implementing clone() can be difficult when their internals include objects that don’t support copying or have circular references.
+
+4.Factory:
+ Create different product types (simple factory)
+- currently there are 2 types of products BEAUTY & SKINCARE
+- there is a risk that in the future new types will appear or the existing ones will change
+pros:
+Allows you to hide implementation of an application seam (the core interfaces that make up your application)
+Allows you to easily test the seam of an application (that is to mock/stub) certain parts of your application so you can build and test the other parts
+Allows you to change the design of your application more readily, this is known as loose coupling
+cons:
+Makes code more difficult to read as all of your code is behind an abstraction that may in turn hide abstractions.
+Can be classed as an anti-pattern when it is incorrectly used, for example some people use it to wire up a whole application when using an IOC container, instead use Dependency Injection.
+
